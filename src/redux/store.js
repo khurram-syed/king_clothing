@@ -4,8 +4,8 @@ import rootPersistReducer from './root.reducer'
 import {persistStore} from 'redux-persist'
 
 const middleware = []
-
-if(process.env.NODE_ENV!=="production"){
+console.log('*** NODE_ENV :',process.env.NODE_ENV)
+if(process.env.NODE_ENV==="development"){
     middleware.push(logger)
 }
 export const store = createStore(rootPersistReducer,applyMiddleware(...middleware))

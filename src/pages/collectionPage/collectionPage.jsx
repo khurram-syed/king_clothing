@@ -5,8 +5,6 @@ import  {selectCollectionPageData} from '../../redux/shop/shop.selector'
 import CollectionItem from '../../components/collectionItem/collectionItem'
 
  const CollectionPage = ({uniqueCollection,match})=>{
-        console.log('**** match.params : ', match.params)
-        console.log('**** uniqueCollection : ', uniqueCollection)
         const {title, routeName, items} = uniqueCollection;
              return( 
                     <div className="collection-preview">

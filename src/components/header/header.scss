@@ -1,0 +1,35 @@
+.header{
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    //  border:2px solid black;
+    height:20%;
+    margin : 20px;
+}
+.logo-container{
+//    border: 1px solid blue;
+   .logo{
+       padding : 1px;
+       margin : 20px;
+   }    
+}
+
+.options{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100;
+    // border: 1px solid orange;
+    .option{
+        padding : 10px 20px;
+        text-transform: uppercase;
+        // border : 1px solid yellow;
+        text-decoration: none;
+        color : black;
+        &:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    apiKey: "AIzaSyBoIiD2o_uH51MkZ1uhtxjgmCcDflxSLDk",
+    authDomain: "king-clothing-ca050.firebaseapp.com",
+    databaseURL: "https://king-clothing-ca050.firebaseio.com",
+    projectId: "king-clothing-ca050",
+    storageBucket: "king-clothing-ca050.appspot.com",
+    messagingSenderId: "151044396976",
+    appId: "1:151044396976:web:990833b130ff7a34ed2875",
+    measurementId: "G-8L3R7EMTVM"
+  };

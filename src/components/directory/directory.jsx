@@ -7,7 +7,7 @@ import {selectSections} from '../../redux/directory/directory.selector'
 class Directory extends React.Component{
     
     render(){
-         console.log('*** Directory props*** :',this.props)
+        //  console.log('*** Directory props*** :',this.props)
          const {sections} = this.props;
         return( 
             <div className="directory-menu">

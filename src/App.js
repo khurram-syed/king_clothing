@@ -12,6 +12,7 @@ import CheckoutPage from './pages/checkout/checkoutPage';
 import {toggleCartHidden} from './redux/cart/cart.action'
 import {selectCartHidden} from './redux/cart/cart.selector'
 import {selectCurrentUser} from './redux/user/user.selector'
+
 const Hats = ()=>{
   return <div>
       <h1>Hats</h1>
@@ -22,7 +23,9 @@ class App extends React.Component {
    unsubscribeFromAuth = null;
   
   componentDidMount(){
-    const {setCurrentUser} = this.props;
+    const {setCurrentUser,collections} = this.props;
+    // console.log('App-componentDidMount - state :',this.props)
+    
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth=>{
          if(userAuth){
             const userRef = await createUserProfileDoc(userAuth)
@@ -38,6 +41,7 @@ class App extends React.Component {
             // console.log("***User***:",userAuth)
          } 
     })
+    //  addCollectionAndDoc('collections',collections)  --> To add data getting from SHOP_DATA file into FB DB
   }
   
   componentWillUnmount(){
@@ -70,6 +74,6 @@ const mapStateToDispatch= (dispatch)=>({
 })
 const mapStateToProps = (state)=>({
     currentUser : selectCurrentUser(state),
-    hidden : selectCartHidden(state)
+    hidden : selectCartHidden(state),
 })
 export default connect(mapStateToProps,mapStateToDispatch)(App);

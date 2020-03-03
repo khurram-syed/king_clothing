@@ -38,7 +38,35 @@ const config =
       }
       return userRef;
    })
-
+   /* This method is to fetch the data and transform it into list of different objects  */
+  export const convertCollectionsSnapShotToMap = (snapShot)=>{
+          const transformedData = snapShot.docs.map(doc=>{
+                  const collection = doc.data();
+                  const {title,items} = collection;
+                  return {
+                      routeName : encodeURI(collection.title.toLowerCase()),
+                      id : doc.id,
+                      title , 
+                      items
+                  }
+          })
+          // console.log('transformedData : ',transformedData);
+          return transformedData.reduce((accumulator,item)=>{
+               accumulator[item.title.toLowerCase()]= item
+               return accumulator
+          },{})  
+  }
+  
+  /* This method is to write SHOP_DATA file data into FB DB collections `collections` */ 
+  export const addCollectionAndDoc = async (collectionKey,collections)=>{
+        const collectionRef = firestore.collection(collectionKey)
+        const batch = firestore.batch();
+        collections.map(collection =>{
+           const docRef=collectionRef.doc();
+           batch.set(docRef,collection)
+        })
+        return await batch.commit()
+  }
    const provider = new firebase.auth.GoogleAuthProvider();
    provider.setCustomParameters({prompt:'select_account'})
 

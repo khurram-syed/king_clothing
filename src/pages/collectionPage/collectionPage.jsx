@@ -10,10 +10,11 @@ import CollectionItem from '../../components/collectionItem/collectionItem'
                     <div className="collection-preview">
                       <h1 className="title" >{title}</h1>
                       <div className="preview">
-                       {items.map(item=>{
-                          return( 
-                            <CollectionItem key={item.id} routeName={routeName} {...item} />)
-                        })}
+                       {items.map(item=>
+                           (
+                               <CollectionItem key={item.id} routeName={routeName} {...item} />
+                            )
+                        )}
                       </div>
                     </div>
               )

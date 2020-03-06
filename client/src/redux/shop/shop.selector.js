@@ -17,3 +17,9 @@ export const selectCollectionPageData = (paramURL)=>createSelector(
     [selectShopCollections],
      collections => collections? collections[paramURL] : []
 )
+
+
+export const selectIsCollectionsLoading = createSelector(
+     [selectShop], 
+      shop=>!! shop.collections
+ )

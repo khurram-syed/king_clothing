@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {lazy,Suspense}from 'react'
 import CollectionOverview from '../../components/collectionOverview/collectionOverview'
 import './shopPage.scss'
 import {Route} from 'react-router-dom'
@@ -8,8 +8,11 @@ import {selectShopDataAsCollectionPreview} from '../../redux/shop/shop.selector'
 import {firestore,convertCollectionsSnapShotToMap} from '../../firebase/firebase.utils'
 import {connect} from 'react-redux'
 import WithSpinner from '../../components/withSpinner/withSpinner'
-const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview)
-const CollectionPageWithSpinner = WithSpinner(CollectionPage)
+import Spinner from '../../components/spinner/spinner'
+const CollectionOverviewContainer = lazy(()=> import ('../../components/collectionOverview/collectionOverviewContainer'))
+const CollectionPageContainer = lazy(()=> import ('../collectionPage/collectionPageContainer'))
+// const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview)
+// const CollectionPageWithSpinner = WithSpinner(CollectionPage)
 class ShopPage extends React.Component{
       
        state = {isLoading : true}
@@ -30,12 +33,14 @@ class ShopPage extends React.Component{
            const {match} = this.props;
            const {isLoading} = this.state
          return(
+           <Suspense fallback={<Spinner />} >
             <div className="shop-page">                      
-                <Route exact path={`${match.path}`} 
-                    render={(props)=><CollectionOverviewWithSpinner isLoading={isLoading} {...props} />} />
-                <Route  path={`${match.path}/:collectionId`} 
-                    render={(props)=><CollectionPageWithSpinner isLoading={isLoading} {...props} /> } />
+                <Route exact path={`${match.path}`} component={CollectionOverviewContainer} />
+                    {/* render={(props)=><CollectionOverviewWithSpinner isLoading={isLoading} {...props} />} /> */}
+                <Route  path={`${match.path}/:collectionId`} component={CollectionPageContainer} />
+                    {/* // render={(props)=><CollectionPageWithSpinner isLoading={isLoading} {...props} /> } /> */}
            </div> 
+           </Suspense>   
               )  
          }            
 }
@@ -43,7 +48,7 @@ class ShopPage extends React.Component{
 const mapDispatchToProps = (dispatch)=>({
      fetchedCollections : (collections) => dispatch(updateCollections(collections))
 })
-const mapStateToProps = (state)=>({
-     collections : selectShopDataAsCollectionPreview(state)
-})
-export default connect(mapStateToProps,mapDispatchToProps) (ShopPage);
+// const mapStateToProps = (state)=>({
+//      collections : selectShopDataAsCollectionPreview(state)
+// })
+export default connect(null,mapDispatchToProps) (ShopPage);

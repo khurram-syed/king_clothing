@@ -19,7 +19,7 @@ const HomePage = lazy(() => import('./pages/homePage/homePage.page') )
 const ShopPage = lazy(() => import('./pages/shopPage/shopPage.page'))
 const SignInAndSignUpPage = lazy(() => import('./pages/signInAndSignUpPage/signInAndSignUpPage'))
 const CheckoutPage= lazy(() => import('./pages/checkout/checkoutPage'));
-
+const CollectionPageContainer = lazy(()=> import ('./pages/collectionPage/collectionPageContainer'))
 
 
 class App extends React.Component {
@@ -53,7 +53,7 @@ class App extends React.Component {
   }
 handleDropDown =()=>{
    if(!this.props.hidden){
-     this.props.toggleCartHidden()
+    //  this.props.toggleCartHidden()
    }
 }
   render(){
@@ -63,9 +63,10 @@ handleDropDown =()=>{
                     <Switch>
                       <Suspense fallback={<Spinner />} >
                         <Route exact path="/" component={HomePage} />
-                        <Route path="/shop" component={ShopPage} />
-                        <Route path="/checkout" component={CheckoutPage} />
-                        <Route render={()=>this.props.currentUser?(<Redirect to="/" />):(<SignInAndSignUpPage />)}/>
+                        <Route  path="/shop" component={ShopPage} />
+                        {/* <Route exact path="/shop/:collectionId" component={CollectionPageContainer} /> */}
+                        <Route exact path="/checkout" component={CheckoutPage} />
+                        <Route exact path="/signin" render={()=>this.props.currentUser?(<Redirect to="/" />):(<SignInAndSignUpPage />)}/>
                         </Suspense>
                     </Switch>    
                 </div>

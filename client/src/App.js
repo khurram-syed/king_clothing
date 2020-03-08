@@ -15,6 +15,7 @@ import {toggleCartHidden} from './redux/cart/cart.action'
 import {selectCartHidden} from './redux/cart/cart.selector'
 import {selectCurrentUser} from './redux/user/user.selector'
 import Spinner from './components/spinner/spinner';
+import ErrorBoundary from './components/errorBoundary/errorBoundary';
 const HomePage = lazy(() => import('./pages/homePage/homePage.page') )
 const ShopPage = lazy(() => import('./pages/shopPage/shopPage.page'))
 const SignInAndSignUpPage = lazy(() => import('./pages/signInAndSignUpPage/signInAndSignUpPage'))
@@ -61,6 +62,7 @@ handleDropDown =()=>{
                 <div onClick={this.handleDropDown}>
                     <Header />
                     <Switch>
+                     <ErrorBoundary>
                       <Suspense fallback={<Spinner />} >
                         <Route exact path="/" component={HomePage} />
                         <Route  path="/shop" component={ShopPage} />
@@ -68,6 +70,7 @@ handleDropDown =()=>{
                         <Route exact path="/checkout" component={CheckoutPage} />
                         <Route exact path="/signin" render={()=>this.props.currentUser?(<Redirect to="/" />):(<SignInAndSignUpPage />)}/>
                         </Suspense>
+                      </ErrorBoundary>  
                     </Switch>    
                 </div>
         );
